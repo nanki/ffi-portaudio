@@ -1,6 +1,6 @@
 = ffi-portaudio
 
-* http://github.com/nanki/ffi-chm
+* http://github.com/nanki/ffi-portaudio
 
 Ruby bindings for PortAudio.
 
