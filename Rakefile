@@ -17,7 +17,7 @@ Jeweler::Tasks.new do |gem|
   gem.name = "ffi-portaudio"
   gem.homepage = "http://github.com/nanki/ffi-portaudio"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
+  gem.summary = %Q{Ruby bindings for PortAudio.}
   gem.description = %Q{Ruby bindings for PortAudio.}
   gem.email = "nanki@dotswitch.net"
   gem.authors = ["nanki"]
