@@ -4,14 +4,14 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{ffi-portaudio}
-  s.version = "0.1.1"
+  s.name = "ffi-portaudio"
+  s.version = "0.1.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = [%q{nanki}]
-  s.date = %q{2011-09-24}
-  s.description = %q{Ruby bindings for PortAudio.}
-  s.email = %q{nanki@dotswitch.net}
+  s.authors = ["nanki"]
+  s.date = "2012-05-08"
+  s.description = "Ruby bindings for PortAudio."
+  s.email = "nanki@dotswitch.net"
   s.extra_rdoc_files = [
     "LICENSE.txt",
     "README.rdoc"
@@ -34,11 +34,11 @@ Gem::Specification.new do |s|
     "test/helper.rb",
     "test/test_ffi-portaudio.rb"
   ]
-  s.homepage = %q{http://github.com/nanki/ffi-portaudio}
-  s.licenses = [%q{MIT}]
-  s.require_paths = [%q{lib}]
-  s.rubygems_version = %q{1.8.6}
-  s.summary = %q{Ruby bindings for PortAudio.}
+  s.homepage = "http://github.com/nanki/ffi-portaudio"
+  s.licenses = ["MIT"]
+  s.require_paths = ["lib"]
+  s.rubygems_version = "1.8.11"
+  s.summary = "Ruby bindings for PortAudio."
 
   if s.respond_to? :specification_version then
     s.specification_version = 3
