@@ -14,6 +14,6 @@ class FFI::PortAudio::Stream
   end
 
   def close
-    API.Pa_CloseStream(@stream)
+    API.Pa_CloseStream(@stream.read_pointer)
   end
 end
