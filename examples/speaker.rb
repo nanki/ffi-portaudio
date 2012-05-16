@@ -15,7 +15,7 @@ end
 Array.send :extend, ArrayExtensions
 
 class Phasor
- attr_accessor :srate
+ attr_accessor :srate, :freq
  def initialize( f = 440.0, srate=44.1e3 )
    @srate = srate
    @phase = rand
@@ -39,8 +39,10 @@ class Phasor
 end
 
 module Speaker
+  @@stream = nil
   extend self
   def [] *args
+    @@stream.close if @@stream
     @@stream = AudioStream.new( *args )
     self
   end
@@ -65,11 +67,15 @@ module Speaker
     @@stream.muted = !@@stream.muted
   end
 
+  def synth
+    @@stream.synth
+  end
+  
 end
 
 class AudioStream < FFI::PortAudio::Stream
   include FFI::PortAudio
-  attr_accessor :gain, :muted
+  attr_accessor :gain, :muted, :synth
   
   def initialize gen, frameSize=2**12, gain=1.0  # 1024
     @synth = gen # responds to tick
@@ -112,17 +118,27 @@ class AudioStream < FFI::PortAudio::Stream
     output[:hostApiSpecificStreamInfo] = nil
     output[:channelCount]              = 1 #2; 
     output[:sampleFormat]              = API::Float32
-    p open( input, output, @synth.srate.to_i, frameSize )
+    open( input, output, @synth.srate.to_i, frameSize )
 
     at_exit do
-      puts "#{self.class} terminating! closing PortAudio stream..."
+      # puts "#{self.class} terminating! closing PortAudio stream..."
       close
       API.Pa_Terminate
-      puts "done!"
+      # puts "done!"
     end
-  end    
-
+  end  
+  
 end
 
 
+puts "starting"
 Speaker[ Phasor.new ]
+sleep 1
+puts "changing frequency"
+Speaker.synth.freq /= 2
+sleep 1
+puts "changing frequency"
+Speaker.synth.freq /= 2
+sleep 1
+puts "muting"
+Speaker.mute
