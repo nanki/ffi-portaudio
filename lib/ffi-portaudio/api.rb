@@ -1,7 +1,7 @@
 module FFI::PortAudio::API
   extend FFI::Library
 
-  ffi_lib ['portaudio', 'libportaudio.so.2']
+  ffi_lib ['portaudio', 'libportaudio.so.2', 'libportaudio-2']
 
   callback :PaStreamCallback, [:pointer, :pointer, :ulong, PaStreamCallbackTimeInfo.in, :ulong, :pointer], :PaStreamCallbackResult
   callback :PaStreamFinishedCallback, [:pointer], :void
