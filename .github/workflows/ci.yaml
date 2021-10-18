@@ -1,0 +1,34 @@
+name: build
+on:
+  - push
+  - pull_request
+jobs:
+  build:
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+    name: ${{ matrix.os }} Ruby ${{ matrix.ruby }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os:   [ 'ubuntu', 'macos']
+        ruby: [ '2.6', '2.7', '3.0' ]
+    runs-on: ${{ matrix.os }}-latest
+    steps:
+      - name: Set up portaudio (ubuntu)
+        if: ${{ matrix.os == 'ubuntu' }}
+        run: |
+          sudo apt update -y
+          sudo apt install -y -V portaudio19-dev
+      - name: Set up portaudio (macos)
+        if: ${{ matrix.os == 'macos' }}
+        run: |
+          brew install portaudio
+      - uses: actions/checkout@v2
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+      - name: Bundle install
+        run: |
+          bundle config path vendor/bundle
+          bundle install --jobs 4 --retry 3
+      - name: Rake test
+        run: bundle exec rake test
