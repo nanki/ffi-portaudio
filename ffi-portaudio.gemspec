@@ -30,5 +30,7 @@ Gem::Specification.new do |s|
   s.license = "MIT"
   s.require_paths = ["lib"]
   s.add_dependency "ffi"
+
+  s.metadata['msys2_mingw_dependencies'] = 'portaudio'
 end
 
